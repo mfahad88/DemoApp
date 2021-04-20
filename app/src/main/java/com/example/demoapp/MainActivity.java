@@ -7,26 +7,22 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 public class MainActivity extends AppCompatActivity {
-    DrawerLayout drawer;
+    /*DrawerLayout drawer;
     ActionBarDrawerToggle toggle;
     Toolbar toolbar;
-    private AdView mAdView;
+    private AdView mAdView;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        drawer=findViewById(R.id.drawer_layout);
+        /*drawer=findViewById(R.id.drawer_layout);
         toolbar=findViewById(R.id.toolbar);
 
         mAdView = findViewById(R.id.adView);
@@ -46,6 +42,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         drawer.setDrawerListener(toggle);
-        toggle.syncState();
+        toggle.syncState();*/
     }
 }
