@@ -12,11 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DemoApp">
         <service
-            android:name=".MyService"
+            android:name=".service.MyService"
             android:enabled="true"
             android:exported="false"></service>
 
-        <receiver android:name=".RestartServiceReceiver" >
+        <receiver android:name=".broadcast.RestartServiceReceiver" >
             <intent-filter>
                 <action android:name="YouWillNeverKillMe" >
                 </action>

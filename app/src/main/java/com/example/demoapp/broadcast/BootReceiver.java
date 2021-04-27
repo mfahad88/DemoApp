@@ -1,4 +1,4 @@
-package com.example.demoapp;
+package com.example.demoapp.broadcast;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

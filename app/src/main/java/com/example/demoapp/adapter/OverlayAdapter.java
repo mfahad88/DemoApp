@@ -1,15 +1,13 @@
-package com.example.demoapp.dua;
+package com.example.demoapp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.demoapp.R;
@@ -17,13 +15,12 @@ import com.example.demoapp.R;
 import java.util.List;
 import java.util.Objects;
 
-
-public class DuaAdapter extends PagerAdapter {
+public class OverlayAdapter extends PagerAdapter {
     Context context;
     List<String> list;
     LayoutInflater mLayoutInflater;
 
-    public DuaAdapter(Context context, List<String> list) {
+    public OverlayAdapter(Context context, List<String> list) {
         this.context = context;
         this.list = list;
         this.mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

@@ -1,14 +1,9 @@
 package com.example.demoapp;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.BroadcastReceiver;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,7 +12,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.example.demoapp.dua.DuaFragment;
+import com.example.demoapp.fragment.DuaFragment;
+import com.example.demoapp.service.MyService;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -30,8 +26,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent svc = new Intent(this, MyService.class);
-        startService(svc);
+       /* Intent svc = new Intent(this, MyService.class);
+        startService(svc);*/
         imageViewClose=findViewById(R.id.imageViewClose);
         linearDua=findViewById(R.id.linearDua);
         linearAzkar=findViewById(R.id.linearAzkar);
@@ -47,7 +43,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(MainActivity.this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, 1234);
+            }else{
+                Intent intent = new Intent(MainActivity.this, MyService.class);
+                startService(intent);
+            }
+        } else {
+            Intent intent = new Intent(MainActivity.this, MyService.class);
+            startService(intent);
+        }
        /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if(!Settings.canDrawOverlays(this)){
                 // ask for setting
