@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.PixelFormat;
+import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,6 +45,7 @@ public class MyService extends Service {
             try {
                 KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(KEYGUARD_SERVICE);
                 if (intent.getAction().equals(Intent.ACTION_SCREEN_ON) && keyguardManager!=null && !keyguardManager.isKeyguardLocked()) {
+                    screenON=true;
                     if(view.isShown()){
                         windowManager.updateViewLayout(view,layoutParams);
                     }else{
@@ -78,11 +80,17 @@ public class MyService extends Service {
         registerReceiver(broadcastReceiver,intentFilter);
 //        broadcastReceiver=new BootReceiver();
 
-        layoutParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_PHONE,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE /*| WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL*/,
-                PixelFormat.TRANSLUCENT);
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            layoutParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE /*| WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL*/,
+                    PixelFormat.TRANSLUCENT);
+        }else{
+            layoutParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.TYPE_PHONE,
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE /*| WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL*/,
+                    PixelFormat.TRANSLUCENT);
+        }
 
         layoutParams.height= (int) Utils.dpToPx(getApplicationContext(),300);
         layoutParams.width= (int) Utils.dpToPx(getApplicationContext(),300);
