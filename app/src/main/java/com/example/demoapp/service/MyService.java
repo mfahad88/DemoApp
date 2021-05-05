@@ -7,9 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.PixelFormat;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.IBinder;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,13 +22,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.demoapp.MainActivity;
 import com.example.demoapp.R;
+import com.example.demoapp.adapter.DuaAdapter;
 import com.example.demoapp.adapter.OverlayAdapter;
 import com.example.demoapp.broadcast.BootReceiver;
+import com.example.demoapp.fragment.DuaFragment;
 import com.example.demoapp.helper.Utils;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +48,9 @@ public class MyService extends Service {
     boolean screenON;
     ImageView imageViewClose,imageViewBack,imageViewForward,imageViewShare;
     ViewPager viewPager;
-    OverlayAdapter adapter;
+    PagerAdapter adapter;
+    private LinearLayout linearDua,linearAzkar,linearNamaz,linearIstikhara;
+    Context context;
     BroadcastReceiver broadcastReceiver=new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -52,14 +64,13 @@ public class MyService extends Service {
                         windowManager.addView(view,layoutParams);
                     }
                 }
-                Log.i(TAG, "onReceive: "+screenON);
+                Log.e(TAG, "onReceive: "+screenON);
             } catch (Exception e) {
                 e.fillInStackTrace();
             }
         }
     };
-    public MyService() {
-    }
+
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -78,33 +89,34 @@ public class MyService extends Service {
         IntentFilter intentFilter=new IntentFilter(Intent.ACTION_SCREEN_ON);
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
         registerReceiver(broadcastReceiver,intentFilter);
-        layoutParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_PHONE,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE /*| WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL*/,
-                PixelFormat.TRANSLUCENT);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             layoutParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT,
                     WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
                     WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
-                    PixelFormat.TRANSLUCENT);
+                    PixelFormat.TRANSPARENT);
         }else{
             layoutParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT,
                     WindowManager.LayoutParams.TYPE_PHONE,
                     WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
-                    PixelFormat.TRANSLUCENT);
+                    PixelFormat.TRANSPARENT);
         }
 
-        layoutParams.height= (int) Utils.dpToPx(getApplicationContext(),300);
-        layoutParams.width= (int) Utils.dpToPx(getApplicationContext(),300);
+//        layoutParams.height= (int) Utils.dpToPx(getApplicationContext(),300);
+//        layoutParams.width= (int) Utils.dpToPx(getApplicationContext(),300);
 
         imageViewClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 windowManager.removeView(view);
+                Intent filter=new Intent("event");
+                filter.putExtra("isUpdated",true);
+                Log.e(TAG, "onClick: "+filter.getBooleanExtra("isUpdated",false) );
+                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(filter);
             }
         });
-        viewPager.setAdapter(adapter);
+
         viewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -139,6 +151,73 @@ public class MyService extends Service {
                 startActivity(shareIntent);
             }
         });
+
+            linearDua.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "linearDua", Toast.LENGTH_SHORT).show();
+                    if(adapter!=null) {
+                        viewPager.setAdapter(null);
+                    }
+
+                    adapter=new DuaAdapter(getApplicationContext(),getDuas());
+                    viewPager.setAdapter(adapter);
+                }
+            });
+
+            linearAzkar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "linearAzkar", Toast.LENGTH_SHORT).show();
+                    if(adapter!=null) {
+                        viewPager.setAdapter(null);
+                    }
+
+                    adapter=new DuaAdapter(getApplicationContext(),getDuas());
+                    viewPager.setAdapter(adapter);
+                }
+            });
+
+            linearNamaz.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "linearNamaz", Toast.LENGTH_SHORT).show();
+                    if(adapter!=null) {
+                        viewPager.setAdapter(null);
+                    }
+
+                    adapter=new DuaAdapter(getApplicationContext(),getDuas());
+                    viewPager.setAdapter(adapter);
+                }
+            });
+
+            linearIstikhara.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "linearIstikhara", Toast.LENGTH_SHORT).show();
+                    if(adapter!=null) {
+                        viewPager.setAdapter(null);
+                    }
+
+                    adapter=new DuaAdapter(getApplicationContext(),getDuas());
+                    viewPager.setAdapter(adapter);
+                }
+            });
+
+        final Display display = windowManager.getDefaultDisplay();
+        Point outPoint = new Point();
+        if (Build.VERSION.SDK_INT >= 19) {
+            // include navigation bar
+            display.getRealSize(outPoint);
+        } else {
+            // exclude navigation bar
+            display.getSize(outPoint);
+        }
+
+        Log.e("Real Size",outPoint.x+"\n"+outPoint.y);
+        layoutParams.width= (int) (outPoint.x*0.8);
+        linearDua.performClick();
+//        layoutParams.height= (int) (outPoint.y*0.9);
     }
 
     private void initViews() {
@@ -147,12 +226,17 @@ public class MyService extends Service {
         imageViewForward=view.findViewById(R.id.imageViewForward);
         imageViewShare=view.findViewById(R.id.imageViewShare);
         viewPager=view.findViewById(R.id.viewPager);
-        adapter=new OverlayAdapter(getApplicationContext(),getDuas());
+        imageViewClose=view.findViewById(R.id.imageViewClose);
+        linearDua=view.findViewById(R.id.linearDua);
+        linearAzkar=view.findViewById(R.id.linearAzkar);
+        linearNamaz=view.findViewById(R.id.linearNamaz);
+        linearIstikhara=view.findViewById(R.id.linearIstikhara);
+
+
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.e(TAG, "onStartCommand");
         return START_STICKY;
     }
 
@@ -175,4 +259,6 @@ public class MyService extends Service {
 
         return list;
     }
+
+
 }

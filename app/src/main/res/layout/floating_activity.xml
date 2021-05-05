@@ -4,11 +4,97 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="5dp"
+    app:cardBackgroundColor="#CEFFFFFF"
     app:cardCornerRadius="6dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="4"
+            android:id="@+id/linearMenu">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:id="@+id/linearDua"
+                android:layout_weight="1"
+                android:background="@drawable/drawable_yellow">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dua"
+                    android:rotation="90"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:id="@+id/linearAzkar"
+                android:background="@drawable/drawable_blue">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Azkar"
+                    android:rotation="90"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:id="@+id/linearNamaz"
+                android:background="@drawable/drawable_purple">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Namaz"
+                    android:rotation="90"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:id="@+id/linearIstikhara"
+                android:background="@drawable/drawable_green">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Istikhara"
+                    android:rotation="90"
+                    />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -24,6 +110,7 @@
             android:layout_below="@id/imageViewClose"
             android:id="@+id/viewPager"
             android:layout_above="@id/linearController"
+            android:layout_toRightOf="@id/linearMenu"
             />
 
         <LinearLayout

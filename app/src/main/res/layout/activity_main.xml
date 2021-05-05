@@ -5,91 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6FACACAC">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="4"
-        android:id="@+id/linearMenu">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:id="@+id/linearDua"
-            android:layout_weight="1"
-            android:background="@drawable/drawable_yellow">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dua"
-                android:rotation="90"
-                />
+    android:background="@drawable/q">
 
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:id="@+id/linearAzkar"
-            android:background="@drawable/drawable_blue">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Azkar"
-                android:rotation="90"
-                />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:id="@+id/linearNamaz"
-            android:background="@drawable/drawable_purple">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Namaz"
-                android:rotation="90"
-                />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:id="@+id/linearIstikhara"
-            android:background="@drawable/drawable_green">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Istikhara"
-                android:rotation="90"
-                />
-
-
-        </LinearLayout>
-
-    </LinearLayout>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -98,25 +16,122 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         app:adSize="BANNER"
-        android:layout_toRightOf="@id/linearMenu"
         app:adUnitId="ca-app-pub-3940256099942544/6300978111"
         />
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_toRightOf="@id/linearMenu"
-        android:layout_below="@id/adView"
-        android:layout_above="@id/imageViewClose"
-        android:padding="10dp"
-        android:id="@+id/mainContainer"/>
 
-    <ImageView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_close_24"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/adView"
+        android:id="@+id/linearToday"
+        android:orientation="vertical"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/square_drawable">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Today"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="3dp"
+            android:text="9"
+            android:layout_marginTop="5dp"
+            android:textSize="22sp"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/adView"
+        android:id="@+id/linearWeek"
+        android:orientation="vertical"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="50dp"
         android:layout_alignParentRight="true"
-        android:padding="7dp"
-        android:scaleType="fitXY"
-        android:id="@+id/imageViewClose"/>
+        android:background="@drawable/square_drawable">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="This Week"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="9"
+            android:layout_marginTop="5dp"
+            android:textSize="22sp"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearToday"
+        android:id="@+id/linearMonth"
+        android:orientation="vertical"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/square_drawable">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="This Month"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="9"
+            android:layout_marginTop="5dp"
+            android:textSize="22sp"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearWeek"
+        android:id="@+id/linearApp"
+        android:orientation="vertical"
+        android:layout_alignTop="@id/linearMonth"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/square_drawable">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Since using the app"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="9"
+            android:id="@+id/txt_since"
+            android:layout_marginTop="5dp"
+            android:textSize="22sp"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
 </RelativeLayout>

@@ -6,12 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.example.demoapp.MainActivity;
 import com.example.demoapp.R;
+import com.example.demoapp.helper.DBHelper;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,12 +26,15 @@ public class DuaAdapter extends PagerAdapter {
     Context context;
     List<String> list;
     LayoutInflater mLayoutInflater;
-
+    DBHelper dbHelper;
     public DuaAdapter(Context context, List<String> list) {
         this.context = context;
-        this.list = list;
+        this.list=list;
         this.mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        dbHelper=new DBHelper(context);
     }
+
+
 
     @Override
     public int getCount() {
@@ -44,6 +53,11 @@ public class DuaAdapter extends PagerAdapter {
         TextView textView=(TextView)view.findViewById(R.id.textView);
         textView.setText(list.get(position));
         Objects.requireNonNull(container).addView(view);
+        Date date=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("dd-MMM-yyyy");
+        String dateFormated=sdf.format(date);
+        dbHelper.insertContact(dateFormated);
+
         return view;
     }
 

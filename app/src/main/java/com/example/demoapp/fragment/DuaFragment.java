@@ -48,6 +48,7 @@ public class DuaFragment extends Fragment {
         adapter=new DuaAdapter(getContext(),getDuas());
         viewPager.setAdapter(adapter);
 
+
         viewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
