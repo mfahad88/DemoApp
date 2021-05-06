@@ -53,10 +53,8 @@ public class DuaAdapter extends PagerAdapter {
         TextView textView=(TextView)view.findViewById(R.id.textView);
         textView.setText(list.get(position));
         Objects.requireNonNull(container).addView(view);
-        Date date=new Date();
-        SimpleDateFormat sdf=new SimpleDateFormat("dd-MMM-yyyy");
-        String dateFormated=sdf.format(date);
-        dbHelper.insertContact(dateFormated);
+
+        dbHelper.insertContact();
 
         return view;
     }

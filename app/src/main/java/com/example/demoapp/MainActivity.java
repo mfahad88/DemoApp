@@ -23,10 +23,12 @@ import com.example.demoapp.service.MyService;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
 
     private AdView mAdView;
-    private TextView txt_since;
+    private TextView txt_since,txt_month,txt_week,txt_today;
     DBHelper dbHelper;
     LocalBroadcastManager localBroadcastManager;
     BroadcastReceiver broadcastReceiver=new BroadcastReceiver() {
@@ -51,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mAdView = findViewById(R.id.adView);
         txt_since = findViewById(R.id.txt_since);
+        txt_month = findViewById(R.id.txt_month);
+        txt_week = findViewById(R.id.txt_week);
+        txt_today = findViewById(R.id.txt_today);
         dbHelper=new DBHelper(getApplicationContext());
         localBroadcastManager=LocalBroadcastManager.getInstance(this);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -77,8 +82,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fetchData() {
-        Toast.makeText(this, ""+dbHelper.numberOfRows(), Toast.LENGTH_SHORT).show();
+
+        Date date=new Date();
+        Toast.makeText(this, ""+date.getDate(), Toast.LENGTH_SHORT).show();
         txt_since.setText(String.valueOf(dbHelper.numberOfRows()));
+        txt_today.setText(String.valueOf(dbHelper.getDay(String.valueOf(date.getDate()))));
+        txt_month.setText(String.valueOf(dbHelper.getMonth(String.valueOf(date.getMonth()+1))));
+        txt_week.setText(String.valueOf(dbHelper.getWeek()));
     }
 
     @Override
