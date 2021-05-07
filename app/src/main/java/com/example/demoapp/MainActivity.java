@@ -69,14 +69,20 @@ public class MainActivity extends AppCompatActivity {
                         Uri.parse("package:" + getPackageName()));
                 startActivityForResult(intent, 1234);
             }else{
-
                 Intent intent = new Intent(getApplicationContext(), MyService.class);
-                startService(intent);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    startForegroundService(intent);
+                }else{
+                    startService(intent);
+                }
             }
         } else {
             Intent intent = new Intent(getApplicationContext(), MyService.class);
-
-            startService(intent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(intent);
+            }else{
+                startService(intent);
+            }
         }
 
     }
@@ -84,11 +90,11 @@ public class MainActivity extends AppCompatActivity {
     public void fetchData() {
 
         Date date=new Date();
-        Toast.makeText(this, ""+date.getDate(), Toast.LENGTH_SHORT).show();
+
         txt_since.setText(String.valueOf(dbHelper.numberOfRows()));
-        txt_today.setText(String.valueOf(dbHelper.getDay(String.valueOf(date.getDate()))));
+        txt_today.setText(String.valueOf(dbHelper.getDay(String.valueOf(date.getDate()),String.valueOf(date.getMonth()+1))));
         txt_month.setText(String.valueOf(dbHelper.getMonth(String.valueOf(date.getMonth()+1))));
-        txt_week.setText(String.valueOf(dbHelper.getWeek()));
+        txt_week.setText(String.valueOf(dbHelper.getWeek(String.valueOf(date.getMonth()+1))));
     }
 
     @Override

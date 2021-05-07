@@ -1,6 +1,10 @@
 package com.example.demoapp.service;
 
 import android.app.KeyguardManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -90,6 +95,24 @@ public class MyService extends Service {
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
         registerReceiver(broadcastReceiver,intentFilter);
 
+
+        if (Build.VERSION.SDK_INT >= 26) {
+            String CHANNEL_ID = "my_channel_01";
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
+                    "Channel human readable title",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+
+            ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(channel);
+            Intent notificationIntent = new Intent(this,MainActivity.class);
+            PendingIntent conPendingIntent = PendingIntent.getActivity(this,0,notificationIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+            Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setContentTitle("")
+                    .setContentText("")
+                    .setContentIntent(conPendingIntent)
+                    .build();
+
+            startForeground(1, notification);
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             layoutParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT,
@@ -243,6 +266,7 @@ public class MyService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        unregisterReceiver(broadcastReceiver);
         sendBroadcast(new Intent("YouWillNeverKillMe"));
     }
 

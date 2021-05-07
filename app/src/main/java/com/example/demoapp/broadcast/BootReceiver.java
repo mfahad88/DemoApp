@@ -19,7 +19,6 @@ public class BootReceiver extends BroadcastReceiver {
                 screenOff = false;
             }
             Log.i(TAG, "onReceive: "+screenOff);
-            Toast.makeText(context, ""+screenOff, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.fillInStackTrace();
         }

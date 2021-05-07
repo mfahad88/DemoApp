@@ -63,21 +63,26 @@ public class DBHelper extends SQLiteOpenHelper {
       return res.getCount();
    }
 
-   public int getWeek() {
+   public int getWeek(String month) {
       SQLiteDatabase db = this.getReadableDatabase();
-
-      String sql="SELECT * FROM history where strftime('%w',created_at) BETWEEN '0' AND '6'";
+      if(Integer.parseInt(month)<10){
+         month="0"+month;
+      }
+      String sql="SELECT * FROM history where strftime('%w',created_at) BETWEEN '0' AND '6' AND strftime('%m',created_at)='"+month+"'";
       Cursor res =  db.rawQuery(sql , null );
       Log.e("Sql-->", "getWeek: "+sql );
       return res.getCount();
    }
 
-   public int getDay(String day) {
+   public int getDay(String day,String month) {
       SQLiteDatabase db = this.getReadableDatabase();
       if(Integer.parseInt(day)<10){
          day="0"+day;
       }
-      String sql="SELECT * FROM history where strftime('%d',created_at)='"+day+"'";
+      if(Integer.parseInt(month)<10){
+         month="0"+month;
+      }
+      String sql="SELECT * FROM history where strftime('%d',created_at)='"+day+"' AND strftime('%m',created_at)='"+month+"'";
       Cursor res =  db.rawQuery( sql, null );
       Log.e("Sql-->", "getDay: "+sql );
       return res.getCount();

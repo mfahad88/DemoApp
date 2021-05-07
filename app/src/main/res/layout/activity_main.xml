@@ -19,123 +19,123 @@
         app:adUnitId="ca-app-pub-3940256099942544/6300978111"
         />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp"
         android:layout_below="@id/adView"
-        android:id="@+id/linearToday"
-        android:orientation="vertical"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="50dp"
-        android:layout_alignParentLeft="true"
-        android:background="@drawable/square_drawable">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Today"
-            android:padding="8dp"
-            android:textSize="18sp"
-            android:gravity="center_horizontal"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="3dp"
-            android:text="9"
-            android:id="@+id/txt_today"
-            android:layout_marginTop="5dp"
-            android:textSize="22sp"
-            android:gravity="center_horizontal"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/adView"
-        android:id="@+id/linearWeek"
-        android:orientation="vertical"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="50dp"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/square_drawable">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="This Week"
-            android:padding="8dp"
-            android:textSize="18sp"
-            android:gravity="center_horizontal"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="9"
-            android:id="@+id/txt_week"
-            android:layout_marginTop="5dp"
-            android:textSize="22sp"
-            android:gravity="center_horizontal"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/linearToday"
-        android:id="@+id/linearMonth"
-        android:orientation="vertical"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_alignParentLeft="true"
-        android:background="@drawable/square_drawable">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="This Month"
-
-            android:padding="8dp"
-            android:textSize="18sp"
-            android:gravity="center_horizontal"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="9"
-            android:id="@+id/txt_month"
-            android:layout_marginTop="5dp"
-            android:textSize="22sp"
-            android:gravity="center_horizontal"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/linearWeek"
-        android:id="@+id/linearApp"
-        android:orientation="vertical"
-        android:layout_alignTop="@id/linearMonth"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/square_drawable">
-
-        <TextView
+        android:gravity="center">
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Since using the app"
-            android:padding="8dp"
-            android:textSize="18sp"
-            android:gravity="center_horizontal"/>
+            android:id="@+id/linearToday"
+            android:orientation="vertical"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/square_drawable">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="9"
-            android:id="@+id/txt_since"
-            android:layout_marginTop="5dp"
-            android:textSize="22sp"
-            android:gravity="center_horizontal"/>
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Today"
+                android:textSize="18sp"
+                android:gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:text="0"
+                android:id="@+id/txt_today"
+                android:layout_marginTop="5dp"
+                android:textSize="22sp"
+                android:gravity="center_horizontal"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearWeek"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/square_drawable">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="This Week"
+                android:textSize="18sp"
+                android:gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="0"
+                android:id="@+id/txt_week"
+                android:layout_marginTop="5dp"
+                android:padding="5dp"
+                android:textSize="22sp"
+                android:gravity="center_horizontal"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linearToday"
+            android:id="@+id/linearMonth"
+            android:layout_alignLeft="@id/linearToday"
+            android:layout_alignRight="@id/linearToday"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+
+            android:background="@drawable/square_drawable">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="This Month"
+                android:textSize="18sp"
+                android:gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="0"
+                android:id="@+id/txt_month"
+                android:layout_marginTop="5dp"
+                android:padding="5dp"
+                android:textSize="22sp"
+                android:gravity="center_horizontal"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linearWeek"
+            android:id="@+id/linearApp"
+            android:orientation="vertical"
+            android:layout_alignTop="@id/linearMonth"
+            android:layout_alignLeft="@id/linearWeek"
+            android:layout_alignRight="@id/linearWeek"
+            android:background="@drawable/square_drawable">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Since using the app"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="0"
+                android:padding="5dp"
+                android:id="@+id/txt_since"
+                android:layout_marginTop="5dp"
+                android:textSize="22sp"
+                android:gravity="center_horizontal"/>
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>
